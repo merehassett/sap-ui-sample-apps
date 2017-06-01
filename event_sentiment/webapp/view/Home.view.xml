@@ -1,0 +1,35 @@
+<mvc:View 
+	controllerName="event_sentiment.controller.Home" 
+	xmlns:html="http://www.w3.org/1999/xhtml" 
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	displayBlock="true"
+	xmlns="sap.m">
+	<App>
+		<pages>
+			<Page title="{i18n>title}{/eventName}">
+				<headerContent>
+					<Button icon="sap-icon://settings" text="Change Event" press="onPress" tooltip="Change Event Hashtag to Search" />
+				</headerContent>
+				<content>
+					<l:Grid defaultSpan="L4 M6 S6" class="sapUiSmallMarginTop" id="list"
+						content="{twitterResult>/data}">
+						<l:content>
+							<ObjectListItem icon="{twitterResult>userpic}"
+								highlight="{twitterResult>sentiment}"
+								intro="{twitterResult>username} - {twitterResult>created} - {twitterResult>userlocation}" 
+								title="{twitterResult>text}" 
+								type="{= ${device>/system/phone} ? 'Active' : 'Inactive'}">
+								<firstStatus>
+									<ObjectStatus
+										text="{twitterResult>sentimentText}"
+										state="{twitterResult>sentiment}" />
+								</firstStatus>
+							</ObjectListItem>
+						</l:content>
+					</l:Grid>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
